@@ -1,3 +1,7 @@
 {
-    "name": "Enrichment API"
+    "name": "Enrichment API",
+    "options": {
+        "allow-unauthenticated": false,
+        "max-instances": 1
+    }
 }
