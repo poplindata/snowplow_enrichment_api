@@ -1,0 +1,53 @@
+{
+	"schema": "iglu:com.snowplowanalytics.snowplow.enrichments/api_request_enrichment_config/jsonschema/1-0-0",
+
+	"data": {
+
+		"vendor": "com.snowplowanalytics.snowplow.enrichments",
+		"name": "api_request_enrichment_config",
+		"enabled": true,
+		"parameters": {
+			"inputs": [
+				{
+					"key": "id",
+					"json": {
+						"field": "contexts",
+						"schemaCriterion": "iglu:com.snowplowanalytics.snowplow/client_session/jsonschema/1-*-*",
+						"jsonPath": "$.userId"
+					}
+				}
+			],
+			"api": {
+				"http": {
+					"method": "GET",
+					"uri": "https://australia-southeast1-zoe-js-automation.cloudfunctions.net/snowplow-api-enrichment/{{id}}",
+					"timeout": 2000,
+					"authentication": {
+						"httpBasic": {
+							"username": "test",
+							"password": "123"
+						}
+					}
+				}
+			},
+			"outputs": [
+				{
+					"schema": "iglu:com.fakeexample/user/jsonschema/1-0-0" ,
+					"json": {
+						"jsonPath": "$.name"
+					}
+				},
+				{
+					"schema": "iglu:com.fakeexample/user/jsonschema/1-0-0" ,
+					"json": {
+						"jsonPath": "$.occupation"
+					}
+				}
+			],
+			"cache": {
+				"size": 3000,
+				"ttl": 60
+			}
+		}
+	}
+}
